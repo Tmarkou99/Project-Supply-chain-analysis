@@ -22,7 +22,6 @@ data <- data %>% rename(carrier = `Shipping carriers`)
 
 
 boxplot(data$Costs)
-plot(data$Costs)
 boxplot(data$production_cost)
 summary(data$Costs)
 unique(data$Routes)
