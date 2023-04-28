@@ -4,6 +4,8 @@ library(dplyr)
 library(ggplot2)
 library(psych)
 library(lmtest)
+library(readr)
+data <- read_csv("data.csv")
 
 
 ########## Data Exploration
@@ -87,13 +89,13 @@ chennai <- data %>%
 
 
 
-# most expensive
+# most expensive product
 data %>% 
   filter(price == max(price)) %>% 
   View()
 
 
-# most profitable
+# most profitable product
 data %>% 
   filter(revenue == max(revenue)) %>% 
   View()
@@ -157,7 +159,9 @@ boxplot(outliers_test$effectiveness)
 ggplot(outliers_test, aes(x = `Transportation modes`, y = `Shipping costs`/`Shipping times`),) +
   geom_point() +
   geom_boxplot()+
-  labs(x = "Transportation modes", y = "Effectiveness")
+  labs(x = "Transportation modes", y = "Effectiveness") # we see that the outliers are gone
+
+
 
 
 
