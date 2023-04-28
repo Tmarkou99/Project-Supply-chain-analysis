@@ -1,0 +1,29 @@
+---
+title: "Notes"
+author: "Theodoris Markou"
+date: '`r Sys.Date()`'
+output: word_document
+---
+
+# Notes
+
+1.  Subset1 is a part of the original data frame that contains only the Shipping times,Shipping costs,Transportation modes,Routes, carrier, Location and it used for calculating the efficiency of the transportation modes and Routes on different Countries.
+2.  
+
+# Tasks
+
+## Cluster analysis for similar products based on characteristics such as price, lead time, defect rates, production cost etc. by country
+
+2.  
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r cars}
+summary(cars)
+```
+
+```{r pressure, echo=FALSE}
+
+```

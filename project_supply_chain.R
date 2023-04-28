@@ -5,6 +5,7 @@ library(ggplot2)
 library(psych)
 library(lmtest)
 library(readr)
+library(factoextra)
 data <- read_csv("data.csv")
 
 
@@ -102,7 +103,7 @@ data %>%
 
 
 ########## Data Analysis
-# The best/worst route for different categories with subset-1
+# 1) The best/worst route for different categories with subset-1
 
 
 subset1 <- data %>% # taking account all the variables
@@ -111,8 +112,9 @@ subset1 <- data %>% # taking account all the variables
 cost_effctv <- subset1 %>%
   mutate(effectiveness = `Shipping costs`/`Shipping times`) %>%
   group_by(Location) %>% # to see the effectiveness in every Location
-  summarize(mean_effectiveness = mean(effectiveness)) %>% 
-  View()
+  summarize(mean_effectiveness = mean(effectiveness)) 
+
+View(cost_effctv)
 
 
 
@@ -162,7 +164,21 @@ ggplot(outliers_test, aes(x = `Transportation modes`, y = `Shipping costs`/`Ship
   labs(x = "Transportation modes", y = "Effectiveness") # we see that the outliers are gone
 
 
+# 2) Clustering similar products for Kolkata
+# based on price, sales, revenue, defect rates using subset2
 
+subset2 <- kolkata %>% 
+  select( type, price, sold, revenue)
 
+cluster1 <- hclust(dist(subset2[, -1]), method = "ward.D2")
 
+clusters <- cutree(cluster1, k = 3)
+
+# adding cluster assignment to subset2 data frame
+subset2$cluster <- factor(clusters, labels = c("Cluster 1", "Cluster 2", "Cluster 3"))
+
+# exclude non-numeric columns before passing to fviz_cluster
+fviz_cluster(list(data = subset2[, -c(1, 5)], cluster = subset2$cluster), 
+             geom = "point", 
+             main = "Cluster visualization")
 
