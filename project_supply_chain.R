@@ -288,5 +288,19 @@ result3 <- subset3 %>%
 result3           # it is the Bangalore
 
 
-# 3.3 the destribution of the products sold in every Location
+# 3.3 the distribution of the products sold in every Location
+#we will use the subset3 data.frame
+
+subset3
+table(subset3$Location)
+
+
+total_prod <- subset3 %>% 
+  nrow() # the total number of products is 100
+
+
+subset3 %>% 
+  group_by(type) %>% 
+  summarise(percent =   )
+
 
