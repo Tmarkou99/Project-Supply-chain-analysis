@@ -40,7 +40,7 @@ author: "Theodoros Markou"
 
 8.  **Inventory analysis**: You could analyze the Stock levels, Availability, and Order quantities variables to optimize your inventory management processes, reduce stockouts, and minimize waste.
 
-9.  Shipping carrier analysis: You could use the Shipping carriers, Shipping times, and Shipping costs variables to analyze the performance of your shipping carriers, identify opportunities to reduce shipping costs, and optimize your shipping processes.
+9.  **Shipping carrier analysis**: You could use the Shipping carriers, Shipping times, and Shipping costs variables to analyze the performance of your shipping carriers, identify opportunities to reduce shipping costs, and optimize your shipping processes. `done`
 
 10. Product analysis: You could analyze the SKU, Price, Revenue generated, and Customer demographics variables to identify your top-selling products, optimize your product mix, and develop new products that target specific customer segments.
 

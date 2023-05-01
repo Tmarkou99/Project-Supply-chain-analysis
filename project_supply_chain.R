@@ -11,6 +11,7 @@ library(tidyr)
 library(forcats)
 library(lmtest)
 library(AIC)
+library(scales)
 
 data <- read_csv("data.csv")
 
@@ -30,6 +31,7 @@ data <- data %>% rename(customer_demo = `Customer demographics`)
 data <- data %>% rename(stock = `Stock levels`)
 data <- data %>% rename(production_cost = `Manufacturing costs`)
 data <- data %>% rename(carrier = `Shipping carriers`)
+data <- data %>% rename(shipping_lead_time = `Lead times`)
 
 
 boxplot(data$Costs)
@@ -339,7 +341,7 @@ result3 <- result3 %>%
 View(result3) 
   
 
-############################ # Cost analysis
+############################ 4.  Cost analysis
 # 4.1 The most expensive Location by average cost per product
 table(data$type)
 
@@ -356,7 +358,21 @@ result4 <- subset4 %>%
   summarise(mean_cost = round(mean(avg_cost),2)) %>% 
   arrange(desc(mean_cost))
 
+
 result4
+
+
+
+
+result4 %>% 
+  ggplot(aes(x= Location, y = mean_cost, fill = Location)) +
+  geom_col(width = 0.5) +
+  scale_y_continuous(limits = c(0, 250)) +
+  labs(x = "Location", y = "Mean Cost", fill = "Location") +
+  ggtitle("Mean Cost by Location") +
+  theme_minimal()
+
+
 
 View(result4) # The average cost per location, we see that the Chennai is the most expensive.
 
@@ -383,5 +399,33 @@ result4.1 <- summary(lm(formula = production_cost ~ Location , data = subset4))
 result4.1
 
 
+########################### 5. Manufacturing Analysis
+# 5.1 How can we optimize the product quality
+
+names(data)
+
+unloadNamespace("MASS") # it causing some issues so we deactivate this package temporary
+
+subset5 <- data %>% 
+  select(lead_time = `Lead time`, production_cost, production_volumes = `Production volumes` ,
+         inspection_results = `Inspection results`,
+         production_lead_time = `Manufacturing lead time` , defect_rates = `Defect rates` ) %>% 
+  mutate(inspection_results = factor(inspection_results, levels = c("Fail", "Pending", "Pass"))) %>% 
+  mutate(inspection_results = recode(inspection_results,
+         "Fail" = -1,
+         "Pass" = 1,
+         "Pending" = 0))
+
+subset5
+
+table(subset5$inspection_results)
+
+model2 <- lm(formula = production_volumes ~ production_cost + defect_rates + production_lead_time
+     + inspection_results, data = subset5) # να το ξανατσεκάρω γιατι θέλει αλλαγή
+
+library(MASS)
+summary(model2)
+plot(model2$residuals)
+stepAIC(model2)
 
 
