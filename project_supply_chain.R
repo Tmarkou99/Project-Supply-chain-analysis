@@ -6,10 +6,11 @@ library(psych)
 library(lmtest)
 library(readr)
 library(factoextra)
-#library(MASS) if needed
+library(MASS) # needed for the stepAIC function
 library(tidyr)
 library(forcats)
 library(lmtest)
+library(AIC)
 
 data <- read_csv("data.csv")
 
@@ -343,8 +344,9 @@ View(result3)
 table(data$type)
 
 subset4 <- data %>%       # Πρώτα να το δω χωρίς το recode
-  #mutate(type = recode(type, skincare = 1, haircare = 2, cosmetics = 3))  #it need the library(forcats)
-  select(Location, type, price, `Shipping costs`, production_cost , Costs)
+  #mutate(type = recode(type, skincare = 1, haircare = 2, cosmetics = 3)) %>%  #it need the library(forcats)
+  select(Location, type, price, `Shipping costs`, production_cost , Costs, `Production volumes`, 
+         `Shipping times`)
 
 subset4  
 
@@ -367,11 +369,19 @@ subset4 <- subset4 %>%     #adding the average cost per product
 names(subset4)
 names(data)
 
-model1 <- lm(formula = production_cost ~ price + `Shipping costs` + Costs  , data = subset4)
-
-summary(model1)
+model1 <- lm(formula = production_cost ~  Location + type + Costs + `Production volumes` +
+               `Shipping costs` + `Shipping times` , data = subset4)
 
 hist(model1$residuals)
 boxplot(model1$residuals)
+summary(model1)  # summarizing the first model to see the coefficients between cost variables.
+
+
+stepAIC(model1) # this test suggests the formula in result4.1
+
+result4.1 <- summary(lm(formula = production_cost ~ Location , data = subset4))
+result4.1
+
+
 
 
