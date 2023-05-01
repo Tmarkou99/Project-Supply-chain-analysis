@@ -6,9 +6,11 @@ library(psych)
 library(lmtest)
 library(readr)
 library(factoextra)
-library(MASS)
+#library(MASS) if needed
 library(tidyr)
 library(forcats)
+library(lmtest)
+
 data <- read_csv("data.csv")
 
 
@@ -352,10 +354,24 @@ result4 <- subset4 %>%
   summarise(mean_cost = round(mean(avg_cost),2)) %>% 
   arrange(desc(mean_cost))
 
-View(result4) # The average cost per location, the Chennai is the most expe
+result4
 
-    
+View(result4) # The average cost per location, we see that the Chennai is the most expensive.
 
 
+subset4 <- subset4 %>%     #adding the average cost per product
+  mutate(avg_cost = (`Shipping costs` + production_cost + Costs)/3) 
+
+# 4.2 how does the different variables effect the average cost per product
+
+names(subset4)
+names(data)
+
+model1 <- lm(formula = production_cost ~ price + `Shipping costs` + Costs  , data = subset4)
+
+summary(model1)
+
+hist(model1$residuals)
+boxplot(model1$residuals)
 
 
