@@ -1,11 +1,8 @@
 # Project-Supply-chain-analysis
 
-
 ---
-title: "Notes"
-author: "Theodoris Markou"
-date: '`r Sys.Date()`'
-output: word_document
+title: "README"
+author: "Theodoros Markou"
 ---
 
 # Notes
@@ -14,18 +11,17 @@ output: word_document
 
 2.\
 
-3.   Subset3 contains a customer demographic part of the original data set.
-    1.  The output that we get using this data set is firstly the demog_type1 which shows the destribution of the buyers
+3.  Subset3 contains a customer demographic part of the original data set. 1. The output that we get using this data set is firstly the demog_type1 which shows the destribution of the buyers
 
 # Tasks
 
-1.  **Cluster analysis** for similar products based on characteristics such as price, lead time, defect rates, production cost etc. by country
+1.  **Cluster analysis** for similar products based on characteristics such as price, lead time, defect rates, production cost etc. by country. [done]
 
 2.  **Sales and revenue analysis**: You could use the sold, Price, and Revenue generated variables to analyze sales trends over time, identify the most profitable products, and optimize pricing strategies.
 
 3.  **Supply chain performance analysis**: You could analyze the Availability, Lead times, Order quantities, Shipping times, and Shipping costs variables to assess the performance of your supply chain, identify bottlenecks, and optimize your ordering and inventory management processes.
 
-4.  **Customer demographics analysis**: You could use the Customer demographics variable to analyze the characteristics of your customer base and identify opportunities to target specific segments with tailored marketing messages or products.
+4.  **Customer demographics analysis**: You could use the Customer demographics variable to analyze the characteristics of your customer base and identify opportunities to target specific segments with tailored marketing messages or products. [done]
 
 5.  **Manufacturing analysis**: You could analyze the Production volumes, Manufacturing lead time, Manufacturing costs, Inspection results, and Defect rates variables to optimize your manufacturing processes, reduce defects, and improve product quality.
 
@@ -42,11 +38,11 @@ output: word_document
 11. Cost analysis: You could use the Price, Shipping costs, Manufacturing costs, and Costs variables to perform a comprehensive cost analysis of your supply chain, identify opportunities to reduce costs, and improve your bottom line.
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+
 ```
 
 ```{r cars}
-summary(cars)
+
 ```
 
 ```{r pressure, echo=FALSE}
