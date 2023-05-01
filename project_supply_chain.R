@@ -8,6 +8,7 @@ library(readr)
 library(factoextra)
 library(MASS)
 library(tidyr)
+library(forcats)
 data <- read_csv("data.csv")
 
 
@@ -117,9 +118,12 @@ data %>%
 ########################### 1. Efficient Routes
 # 1.1 The best/worst route for different categories with subset-1
 
+unloadNamespace("MASS") # it causing some issues so we deactivate this package temporary
 
 subset1 <- data %>% # taking account all the variables
   select(`Shipping times`,`Shipping costs`,`Transportation modes`,Routes, carrier, Location)
+names(subset1)
+
 
 cost_effctv <- subset1 %>%
   mutate(effectiveness = `Shipping costs`/`Shipping times`) %>%
@@ -150,6 +154,7 @@ View(transport_effctv)
 
 # testing the correlation between variables
 result1 <- cor(subset1[, c("Shipping costs", "Shipping times",  "Routes")])
+result1 <- as.table(result1)
 result1
 
 
@@ -199,7 +204,7 @@ fviz_cluster(list(data = subset2[, -c(1, 5)], cluster = subset2$cluster),
 
 
 
-########################### 3. Demographical analysis
+########################### 3. Demographic analysis
 
 # 3.1 Customer demographic analysis (which type of product the different genders buy most)
 
@@ -230,7 +235,9 @@ demog_type1 <- round(addmargins(
     prop.table(table(subset3$gender,subset3$type),1)*100,2),1)
 
 demog_type1                               #the table that's in % sales by gender
+size_sum(demog_type1)
 demog_type1 <- as.data.frame(demog_type1) #it needs to be a data.frame
+
 
 #in the Location (2=location)
 demog_type2 <- round(addmargins(
@@ -262,7 +269,7 @@ result2 <- demog_type3 %>%
   rename(gender = "Var1") %>% 
   filter(Freq != 100) %>% 
   group_by(gender) %>% 
-  summarize(preferes = Var2[Freq == max(Freq)],
+  summarize(preferes = Var2[Freq == max(Freq)], 
             percentage = max(Freq))
 
 View(result2) # Here we see the preferences in type of products by gender.
@@ -291,16 +298,64 @@ result3           # it is the Bangalore
 # 3.3 the distribution of the products sold in every Location
 #we will use the subset3 data.frame
 
-subset3
-table(subset3$Location)
-
 
 total_prod <- subset3 %>% 
   nrow() # the total number of products is 100
 
+subset3 <- data %>% 
+  mutate ( gender = recode( customer_demo,
+                            "Male" = "male",
+                            "Female" = "female",
+                            "Uknown" = "uknown",
+                            "Non-binary" = "both")) %>% 
+  select(type, price, gender , revenue, Location, sold) # (adding the sold to the data.frame)
 
-subset3 %>% 
-  group_by(type) %>% 
-  summarise(percent =   )
+names(subset3)
+
+products_per_location <- as.data.frame(table(subset3$Location))
+products_per_location <- products_per_location  %>%  rename(Location = "Var1") # renaming the Var1 to Location
+products_per_location        # Checking that stracture of the table
+
+result3 <- subset3 %>% 
+  group_by(Location,type) %>% 
+  summarise(number = n()) %>% 
+  pivot_wider(names_from = type, values_from = number) %>% 
+  inner_join(products_per_location, by = "Location")
+  
+result3                      # Checking the inner_join output for wrong values or output
+
+result3 <- result3 %>%
+  pivot_longer(cols = cosmetics:skincare, names_to = "type", values_to = "count") %>%
+  group_by(type) %>%
+  slice_max(count) %>%   #This Function extract rows with the maximum values of a particular column or columns
+  ungroup() %>% 
+  mutate( percentage = (count/Freq)*100) %>% 
+  select(type, Location, total = "Freq" , count , percentage )
+
+  
+View(result3) 
+  
+
+############################ # Cost analysis
+# 4.1 The most expensive Location by average cost per product
+table(data$type)
+
+subset4 <- data %>%       # Πρώτα να το δω χωρίς το recode
+  #mutate(type = recode(type, skincare = 1, haircare = 2, cosmetics = 3))  #it need the library(forcats)
+  select(Location, type, price, `Shipping costs`, production_cost , Costs)
+
+subset4  
+
+result4 <- subset4 %>% 
+  mutate(avg_cost = (`Shipping costs` + production_cost + Costs)/3) %>% 
+  group_by(Location) %>% 
+  summarise(mean_cost = round(mean(avg_cost),2)) %>% 
+  arrange(desc(mean_cost))
+
+View(result4) # The average cost per location, the Chennai is the most expe
+
+    
+
+
 
 

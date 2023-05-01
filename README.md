@@ -17,7 +17,7 @@ author: "Theodoros Markou"
 
 1.  **Cluster analysis** for similar products based on characteristics such as price, lead time, defect rates, production cost etc. by country. [done]
 
-2.  **Sales and revenue analysis**: You could use the sold, Price, and Revenue generated variables to analyze sales trends over time, identify the most profitable products, and optimize pricing strategies.
+2.  **Sales and revenue analysis**: You could use the sold, Price, and Revenue generated variables to analyze sales trends over time, identify the most profitable products, and optimize pricing strategies. [done]
 
 3.  **Supply chain performance analysis**: You could analyze the Availability, Lead times, Order quantities, Shipping times, and Shipping costs variables to assess the performance of your supply chain, identify bottlenecks, and optimize your ordering and inventory management processes.
 
@@ -25,11 +25,11 @@ author: "Theodoros Markou"
 
 5.  **Manufacturing analysis**: You could analyze the Production volumes, Manufacturing lead time, Manufacturing costs, Inspection results, and Defect rates variables to optimize your manufacturing processes, reduce defects, and improve product quality.
 
-6.  Logistics analysis: You could analyze the Transportation modes, Routes, and Costs variables to optimize your logistics operations, reduce transportation costs, and improve delivery times.
+6.  **Logistics analysis**: You could analyze the Transportation modes, Routes, and Costs variables to optimize your logistics operations, reduce transportation costs, and improve delivery times.
 
-7.  Supplier analysis: You could use the Supplier name, Location, and Lead time variables to analyze the performance of your suppliers, identify opportunities to optimize your supplier network, and negotiate better pricing and terms.
+7.  **Supplier analysis**: You could use the Supplier name, Location, and Lead time variables to analyze the performance of your suppliers, identify opportunities to optimize your supplier network, and negotiate better pricing and terms.
 
-8.  Inventory analysis: You could analyze the Stock levels, Availability, and Order quantities variables to optimize your inventory management processes, reduce stockouts, and minimize waste.
+8.  **Inventory analysis**: You could analyze the Stock levels, Availability, and Order quantities variables to optimize your inventory management processes, reduce stockouts, and minimize waste.
 
 9.  Shipping carrier analysis: You could use the Shipping carriers, Shipping times, and Shipping costs variables to analyze the performance of your shipping carriers, identify opportunities to reduce shipping costs, and optimize your shipping processes.
 
