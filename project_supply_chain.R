@@ -48,7 +48,7 @@ products_per_type <- data.frame(products_per_type)
 
 data %>% 
   filter(!complete.cases(.)) %>% 
-  View() # i see that my data set is balanced 
+  View() # i see that my data set is balanced because the output is empty (i don't have missing value)
 
 
 
@@ -123,9 +123,9 @@ data %>%
 ########################### 1. Efficient Routes
 # 1.1 The best/worst route for different categories with subset-1
 
-unloadNamespace("MASS") # it causing some issues so we deactivate this package temporary
+unloadNamespace("MASS") # it causing some issues so i deactivate this package temporary
 
-subset1 <- data %>% # taking account all the variables
+subset1 <- data %>% # taking account all the observations
   select(`Shipping times`,`Shipping costs`,`Transportation modes`,Routes, carrier, Location)
 names(subset1)
 
@@ -160,23 +160,33 @@ View(transport_effctv)
 # testing the correlation between variables
 result1 <- cor(subset1[, c("Shipping costs", "Shipping times",  "Routes")])
 result1 <- as.table(result1)
-result1
+result1   # Here we see the correlation between shipping cost, time and Route.
+          # we see a strong connection between shipping time and Route.
 
 
 
 # Using a box plot we see some outliers, so let's investigate them.
 ggplot(subset1, aes(x = `Transportation modes`, y = `Shipping costs`/`Shipping times`),) +
   geom_point() +
-  geom_boxplot()+
+  geom_boxplot()+           # with outliers
   labs(x = "Transportation modes", y = "Effectiveness")
 
+ggplot(outliers_test, aes(x = `Transportation modes`, y = `Shipping costs`/`Shipping times`),) +
+  geom_point() +
+  geom_boxplot()+           # without the outliers
+  labs(x = "Transportation modes", y = "Effectiveness")
 
 ## investigating the outliers
 
 outliers_test <- subset1 %>% 
   mutate(effectiveness = `Shipping costs`/`Shipping times`) %>% 
-  filter(effectiveness < 2) %>% 
+  filter(effectiveness < 2) %>%    #we filter out the outliers
   group_by(`Transportation modes`)
+
+
+cor(outliers_test[, c("Shipping costs", "Shipping times",  "Routes")])
+#we see a stronger correlation between shipping times and shipping costs
+
 
 describe(outliers_test$effectiveness)
 boxplot(outliers_test$effectiveness)
@@ -198,7 +208,7 @@ cluster1 <- hclust(dist(subset2[, -1]), method = "ward.D2")
 clusters <- cutree(cluster1, k = 3)
 
 # adding cluster assignment to subset2 data frame
-subset2$cluster <- factor(clusters, labels = c("Cluster 1", "Cluster 2", "Cluster 3"))
+subset2$cluster <- factor(clusters, labels = "type")
 
 # exclude non-numeric columns before passing to fviz_cluster
 fviz_cluster(list(data = subset2[, -c(1, 5)], cluster = subset2$cluster), 
@@ -224,24 +234,24 @@ subset3 <- data %>%
           "Non-binary" = "both")) %>% 
   select(type, price, gender , revenue, Location) # (the data.frame for demographic analysis)
 
-table(subset3$gender)
-names(subset3)
-size_sum(subset3)
+table(subset3$gender)             # we see the total number for each gender
+names(subset3)                    # we see all the variable names that subset3 has
+size_sum(subset3)                 # the table dimensions 
 
 
 
 
 
 
-# this table shows the percentage of the different customer demographics emphasizing:
+# this table shows the percentage of the different customer demographics emphasizing in:
 
-#in the type of the product (1=product)
+# the type of the product (1=product)
 demog_type1 <- round(addmargins(
     prop.table(table(subset3$gender,subset3$type),1)*100,2),1)
 
 demog_type1                               #the table that's in % sales by gender
 size_sum(demog_type1)
-demog_type1 <- as.data.frame(demog_type1) #it needs to be a data.frame
+demog_type1 <- as.data.frame(demog_type1) #it needs to be a data.frame for me to analyse it
 
 
 #in the Location (2=location)
@@ -250,10 +260,10 @@ demog_type2 <- round(addmargins(
 
 demog_type2
 size_sum(demog_type2)
-demog_type2 <- as.data.frame(demog_type2) #it needs to be a data.frame
+demog_type2 <- as.data.frame(demog_type2) #it needs to be a data.frame for me to analyse it
 
 
-# Changing the stracture of the demog_types and combining them
+# Changing the stracture of the demog_type 1 & 2  and combining them
 
 demog_type3 <- demog_type1 %>%  as.data.frame()  # Convert to a data frame
 
@@ -286,7 +296,7 @@ View(subset3)
 subset3
 table(subset3$Location) # how many products sold by every location
 
-total_males <- data %>% 
+total_males <- data %>%  # extracting the total number of males (total males = )
   filter(customer_demo == "Male") %>% 
   nrow()
 
@@ -319,7 +329,7 @@ names(subset3)
 
 products_per_location <- as.data.frame(table(subset3$Location))
 products_per_location <- products_per_location  %>%  rename(Location = "Var1") # renaming the Var1 to Location
-products_per_location        # Checking that stracture of the table
+products_per_location        # Checking that structure of the table
 
 result3 <- subset3 %>% 
   group_by(Location,type) %>% 
@@ -352,18 +362,17 @@ subset4 <- data %>%       # Πρώτα να το δω χωρίς το recode
 
 subset4  
 
-result4 <- subset4 %>% 
+result4 <- subset4 %>%    #see below
   mutate(avg_cost = (`Shipping costs` + production_cost + Costs)/3) %>% 
   group_by(Location) %>% 
   summarise(mean_cost = round(mean(avg_cost),2)) %>% 
-  arrange(desc(mean_cost))
+  arrange(desc(mean_cost)) 
 
 
-result4
+result4 # we see the average cost per location
 
-
-
-
+# this graph shows the the average cost but it is not clear what is
+#the difference between the Locations
 result4 %>% 
   ggplot(aes(x= Location, y = mean_cost, fill = Location)) +
   geom_col(width = 0.5) +
@@ -371,6 +380,21 @@ result4 %>%
   labs(x = "Location", y = "Mean Cost", fill = "Location") +
   ggtitle("Mean Cost by Location") +
   theme_minimal()
+
+
+#here we fix the graph so it is more clear what the difference between locations
+overall_mean <- mean(result4$mean_cost)
+
+result4 %>%    # visualization of the avg cost per country
+  mutate(diff_mean = mean_cost - overall_mean) %>% 
+  arrange() %>% 
+  ggplot(aes(x= Location, y = diff_mean, fill = Location)) +
+  geom_col(width = 0.7) +
+  scale_y_continuous(limits = c(-50, 50)) +
+  labs(x = "Location", y = "Difference from Overall Mean Cost", fill = "Location") +
+  ggtitle("Difference from Overall Mean Cost by Location") +
+  theme_minimal() +
+  coord_flip()
 
 
 
@@ -391,12 +415,14 @@ model1 <- lm(formula = production_cost ~  Location + type + Costs + `Production 
 hist(model1$residuals)
 boxplot(model1$residuals)
 summary(model1)  # summarizing the first model to see the coefficients between cost variables.
+                 # Next we will see exactly which variables need to stay in the model1
 
+library(MASS)
+stepAIC(model1) # this test suggests the formula in result4.1 (it requires the MASS library)
+unloadNamespace("MASS") # it causing some issues so we deactivate this package temporary
 
-stepAIC(model1) # this test suggests the formula in result4.1
-
-result4.1 <- summary(lm(formula = production_cost ~ Location , data = subset4))
-result4.1
+model2 <- summary(lm(formula = production_cost ~ Location , data = subset4))
+model2
 
 
 ########################### 5. Manufacturing Analysis
@@ -406,7 +432,7 @@ names(data)
 
 unloadNamespace("MASS") # it causing some issues so we deactivate this package temporary
 
-subset5 <- data %>% 
+subset5 <- data %>%  # it contains every variable needed for manufacturing analysis
   select(lead_time = `Lead time`, production_cost, production_volumes = `Production volumes` ,
          inspection_results = `Inspection results`,
          production_lead_time = `Manufacturing lead time` , defect_rates = `Defect rates` ) %>% 
@@ -420,12 +446,21 @@ subset5
 
 table(subset5$inspection_results)
 
-model2 <- lm(formula = production_volumes ~ production_cost + defect_rates + production_lead_time
-     + inspection_results, data = subset5) # να το ξανατσεκάρω γιατι θέλει αλλαγή
+model3 <- lm(formula = inspection_results ~ production_cost + defect_rates + production_lead_time
+     + production_volumes, data = subset5) # να το ξανατσεκάρω γιατι θέλει αλλαγή
+
+summary(model3)
+test <- as.data.frame(cor(subset5))
+
+cor(subset5[, c("defect_rates", "production_lead_time")])
+# here we see a positive correlation coefficients between the variable
+#we can see that, if the defect_rates increase the production_lead_time tend to increase as well.
 
 library(MASS)
-summary(model2)
-plot(model2$residuals)
-stepAIC(model2)
+summary(model3)
+plot(model3$residuals)
+stepAIC(model3)
 
+summary(lm(formula = inspection_results ~  defect_rates + production_lead_time
+   , data = subset5)) # suggested model?!
 

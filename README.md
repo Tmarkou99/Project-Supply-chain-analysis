@@ -7,14 +7,11 @@ author: "Theodoros Markou"
 
 # Notes
 
-### Subsets / sub-data frames 
+### Subsets / sub-data frames
 
-1.  `Subset1` is a part of the original -ata frame that contains only the Shipping times,Shipping costs,Transportation modes,Routes, carrier, Location and it used for calculating the efficiency of the transportation modes and Routes on different Countries.\
+1.  `Subset1` is a part of the original data-frame that contains only the Shipping times,Shipping costs,Transportation modes,Routes, carrier, Location and it used for calculating the efficiency of the transportation modes and Routes on different Countries.\
 2.  `Subset2`
 
-```{=html}
-<!-- -->
-```
 3.  `Subset3` contains a customer demographic part of the original data set. 1. The output that we get using this data set is firstly the demog_type1 which shows the destribution of the buyers
 
 ### Models
