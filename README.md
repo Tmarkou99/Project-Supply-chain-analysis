@@ -41,7 +41,8 @@ author: "Theodoros Markou"
 ### Models
 
 1.  `model1` Is the model used for finding the connection between costs and the manufacturing process.
-2.  
+2.  `model2` Is the improved version of model1 that "stepAIC()" function sugested
+3. `model3` 
 
 
 
