@@ -60,7 +60,7 @@ author: "Theodoros Markou"
 
         It's worth noting that the standard errors for the coefficients are relatively large compared to their estimates, which may indicate that the sample size is small or that there is a large amount of variation in the data.
 
-# Interpretation / Models
+# Interpretation of Models
 
 ### model1 and model2 :
 
@@ -152,3 +152,5 @@ In both cases, the p-values of the F-statistic suggest that the model does not p
 This is a linear regression analysis on the relationship between defect rates and the variables price, revenue, stock, supplier name, and lead time. The analysis indicates that the lead time has a significant positive effect on the defect rate. On the other hand, the stock level has a significant negative effect on the defect rate. The other variables, price, revenue, and supplier name, do not have a significant effect on the defect rate.
 
 The multiple R-squared value of 0.1949 means that the model can explain about 19.5% of the variation in the defect rate. The adjusted R-squared value of 0.1521 indicates that the model accounts for only 15.2% of the variation after adjusting for the number of variables. The F-statistic of 4.551 with a p-value of 0.0009246 suggests that the overall model is statistically significant. The residual standard error of 1.346 indicates the average distance between the predicted and actual values of the dependent variable.
+
+So, one way to improve the the `defect rates` is to reduce the Lead time (the time that the product is stationary at different places) but also we see the negative relation between stock and defect rates. This can mean that, an increase of stock product can will reduce the defect rates.
