@@ -428,7 +428,7 @@ model2
 
 
 ########################### 5. Manufacturing Analysis
-# 5.1 How can we optimize the product quality
+# 5.1 How can we optimize the product quality (inspection results)
 
 names(data)
 
@@ -480,7 +480,40 @@ stepAIC(model4)
 confint(model4)
 unloadNamespace("MASS") # it causing some issues so we deactivate this package temporary
 
-# Seeing the P.value of the model5 we cannot reject the null hypothesis (that the variables
-#cannot be equal to 0)
+# Seeing the P.value of the model5 we cannot reject the null hypothesis (it means that the 
+#variable coefficients can be equal to 0)
+names(data)
 
+model5 <- lm(formula = `Defect rates` ~ type + price + available + sold + revenue + 
+     stock + shipping_lead_time + `Order quantities` + `Shipping times` + 
+     carrier + `Shipping costs` + `Supplier name` + Location + `Lead time` + 
+     `Production volumes` + `Manufacturing lead time` + production_cost + 
+     `Inspection results` + `Transportation modes` + 
+     Routes + Costs , data = data)
+
+
+library(MASS)
+summary(model5)
+confint(model5)
+plot(model5$residuals)
+hist(model5$residuals)
+boxplot(model5$residuals)
+AIC(model5)         # the AIC test starts from 380.415 so stepAIC will try to reduce it
+stepAIC(model5)     # we see the suggested model has AIC 65.19, let's investigate the model
+unloadNamespace("MASS") # it causing some issues so we deactivate this package temporary
+
+model6 <- lm(formula = `Defect rates` ~ price + revenue + stock + `Supplier name` + 
+     `Lead time`, data = data)
+
+library(MASS)
+summary(model6)
+plot(model6$residuals)    #we see a more 
+confint(model6)
+hist(model6$residuals)
+boxplot(model6$residuals)
+AIC(model6)         # the AIC test starts from 380.415 so stepAIC will try to reduce it
+stepAIC(model6)     # we see the suggested model has AIC 65.19
+unloadNamespace("MASS") # it causing some issues so we deactivate this package temporary
+
+summary(model6)
 

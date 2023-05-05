@@ -4,6 +4,7 @@
 title: "README"
 author: "Theodoros Markou"
 ---
+
 # Tasks
 
 1.  **Cluster analysis** for similar products based on characteristics such as price, lead time, defect rates, production cost etc. by country. `done`
@@ -42,11 +43,7 @@ author: "Theodoros Markou"
 
 1.  `model1` Is the model used for finding the connection between costs and the manufacturing process.
 2.  `model2` Is the improved version of model1 that "stepAIC()" function sugested
-3. `model3` 
-
-
-
-
+3.  `model3`
 
 # Results
 
@@ -106,10 +103,52 @@ author: "Theodoros Markou"
         Multiple R-squared:  0.08918,   Adjusted R-squared:  0.05083 
         F-statistic: 2.325 on 4 and 95 DF,  p-value: 0.06194
 
-   The multiple R-squared measures how well the linear regression model as a whole fits the data. It ranges from 0 to 1, where 0 indicates the model explains none of the variability in the response variable, and 1 indicates the model explains all of the variability. In the first example, the multiple R-squared is 0.12, which means that the model explains 12% of the variability in the response variable.
+The multiple R-squared measures how well the linear regression model as a whole fits the data. It ranges from 0 to 1, where 0 indicates the model explains none of the variability in the response variable, and 1 indicates the model explains all of the variability. In the first example, the multiple R-squared is 0.12, which means that the model explains 12% of the variability in the response variable.
 
-  The adjusted R-squared is a modified version of the multiple R-squared that adjusts for the number of predictors in the model. It penalizes the multiple R-squared for including predictors that do not significantly improve the model fit. A higher adjusted R-squared indicates that a larger proportion of the variability in the response variable is explained by the model, taking into account the number of predictors. In the first model, the adjusted R-squared is 0.02116, which means that the model does not explain much of the variability in the response variable after adjusting for the number of predictors.
+The adjusted R-squared is a modified version of the multiple R-squared that adjusts for the number of predictors in the model. It penalizes the multiple R-squared for including predictors that do not significantly improve the model fit. A higher adjusted R-squared indicates that a larger proportion of the variability in the response variable is explained by the model, taking into account the number of predictors. In the first model, the adjusted R-squared is 0.02116, which means that the model does not explain much of the variability in the response variable after adjusting for the number of predictors.
 
-   In the second model, the multiple R-squared is 0.08918, which indicates that the model explains 8.9% of the variability in the response variable. The adjusted R-squared is 0.05083, which means that the model does not explain much of the variability in the response variable after adjusting for the number of predictors.
+In the second model, the multiple R-squared is 0.08918, which indicates that the model explains 8.9% of the variability in the response variable. The adjusted R-squared is 0.05083, which means that the model does not explain much of the variability in the response variable after adjusting for the number of predictors.
 
-  In both cases, the p-values of the F-statistic suggest that the model does not provide a good fit to the data, as they are greater than the typical significance level of 0.05. This means that the predictors in the model are not significantly associated with the response variable. The coefficients for the predictors indicate the expected change in the response variable for a one-unit increase in each predictor, holding all other predictors constant. **For example, in the first model, the coefficient for Location Kolkata is -24.57007, which means that we would expect the production cost to decrease by \$24.57 if the location changes from Kolkata to the reference location. However, none of the coefficients are statistically significant at the typical significance level of 0.05, so we cannot be confident that the coefficients are different from 0**
+In both cases, the p-values of the F-statistic suggest that the model does not provide a good fit to the data, as they are greater than the typical significance level of 0.05. This means that the predictors in the model are not significantly associated with the response variable. The coefficients for the predictors indicate the expected change in the response variable for a one-unit increase in each predictor, holding all other predictors constant. **For example, in the first model, the coefficient for Location Kolkata is -24.57007, which means that we would expect the production cost to decrease by \$24.57 if the location changes from Kolkata to the reference location. However, none of the coefficients are statistically significant at the typical significance level of 0.05, so we cannot be confident that the coefficients are different from 0**
+
+### model5 and model6
+
+    for model5 -> 
+    Call:
+    lm(formula = `Defect rates` ~ type + price + available + sold + 
+        revenue + stock + shipping_lead_time + `Order quantities` + 
+        `Shipping times` + carrier + `Shipping costs` + `Supplier name` + 
+        Location + `Lead time` + `Production volumes` + `Manufacturing lead time` + 
+        production_cost + `Inspection results` + `Transportation modes` + 
+        Routes + Costs, data = data)
+        
+     
+     
+    for model6 ->   
+    Call:
+    lm(formula = `Defect rates` ~ price + revenue + stock + `Supplier name` + 
+        `Lead time`, data = data)
+
+    Residuals:
+        Min      1Q  Median      3Q     Max 
+    -2.4392 -1.0676 -0.1485  0.8863  2.7856 
+
+    Coefficients:
+                      Estimate Std. Error t value Pr(>|t|)    
+    (Intercept)      2.181e+00  5.540e-01   3.936 0.000159 ***
+    price           -7.049e-03  4.476e-03  -1.575 0.118669    
+    revenue         -7.739e-05  5.020e-05  -1.542 0.126483    
+    stock           -9.478e-03  4.433e-03  -2.138 0.035131 *  
+    `Supplier name`  1.589e-01  9.419e-02   1.686 0.095025 .  
+    `Lead time`      5.288e-02  1.556e-02   3.399 0.000995 ***
+    ---
+    Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+    Residual standard error: 1.346 on 94 degrees of freedom
+    Multiple R-squared:  0.1949,	Adjusted R-squared:  0.1521 
+    F-statistic: 4.551 on 5 and 94 DF,  p-value: 0.0009246
+    ```
+
+This is a linear regression analysis on the relationship between defect rates and the variables price, revenue, stock, supplier name, and lead time. The analysis indicates that the lead time has a significant positive effect on the defect rate. On the other hand, the stock level has a significant negative effect on the defect rate. The other variables, price, revenue, and supplier name, do not have a significant effect on the defect rate.
+
+The multiple R-squared value of 0.1949 means that the model can explain about 19.5% of the variation in the defect rate. The adjusted R-squared value of 0.1521 indicates that the model accounts for only 15.2% of the variation after adjusting for the number of variables. The F-statistic of 4.551 with a p-value of 0.0009246 suggests that the overall model is statistically significant. The residual standard error of 1.346 indicates the average distance between the predicted and actual values of the dependent variable.
