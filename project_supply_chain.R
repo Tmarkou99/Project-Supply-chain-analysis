@@ -171,10 +171,6 @@ ggplot(subset1, aes(x = `Transportation modes`, y = `Shipping costs`/`Shipping t
   geom_boxplot()+           # with outliers
   labs(x = "Transportation modes", y = "Effectiveness")
 
-ggplot(outliers_test, aes(x = `Transportation modes`, y = `Shipping costs`/`Shipping times`),) +
-  geom_point() +
-  geom_boxplot()+           # without the outliers
-  labs(x = "Transportation modes", y = "Effectiveness")
 
 ## investigating the outliers
 
@@ -182,6 +178,11 @@ outliers_test <- subset1 %>%
   mutate(effectiveness = `Shipping costs`/`Shipping times`) %>% 
   filter(effectiveness < 2) %>%    #we filter out the outliers
   group_by(`Transportation modes`)
+
+ggplot(outliers_test, aes(x = `Transportation modes`, y = `Shipping costs`/`Shipping times`),) +
+  geom_point() +
+  geom_boxplot()+           # without the outliers
+  labs(x = "Transportation modes", y = "Effectiveness")
 
 
 cor(outliers_test[, c("Shipping costs", "Shipping times",  "Routes")])
@@ -414,6 +415,7 @@ model1 <- lm(formula = production_cost ~  Location + type + Costs + `Production 
 
 hist(model1$residuals)
 boxplot(model1$residuals)
+plot(model1$residuals)
 summary(model1)  # summarizing the first model to see the coefficients between cost variables.
                  # Next we will see exactly which variables need to stay in the model1
 
@@ -430,7 +432,6 @@ model2
 
 names(data)
 
-unloadNamespace("MASS") # it causing some issues so we deactivate this package temporary
 
 subset5 <- data %>%  # it contains every variable needed for manufacturing analysis
   select(lead_time = `Lead time`, production_cost, production_volumes = `Production volumes` ,
@@ -450,17 +451,35 @@ model3 <- lm(formula = inspection_results ~ production_cost + defect_rates + pro
      + production_volumes, data = subset5) # να το ξανατσεκάρω γιατι θέλει αλλαγή
 
 summary(model3)
-test <- as.data.frame(cor(subset5))
+hist(model3$residuals)
+boxplot(model3$residuals)
+View(cor(subset5))
 
-cor(subset5[, c("defect_rates", "production_lead_time")])
+View(cor(subset5[, c("defect_rates", "production_lead_time")]))
 # here we see a positive correlation coefficients between the variable
 #we can see that, if the defect_rates increase the production_lead_time tend to increase as well.
 
 library(MASS)
-summary(model3)
 plot(model3$residuals)
 stepAIC(model3)
+confint(model3)
+unloadNamespace("MASS") # it causing some issues so we deactivate this package temporary
 
-summary(lm(formula = inspection_results ~  defect_rates + production_lead_time
-   , data = subset5)) # suggested model?!
+model4 <- lm(formula = inspection_results ~  defect_rates + production_lead_time
+   , data = subset5)  # suggested model?!
+
+                      
+View(cor(subset5[, c("inspection_results", "defect_rates", "production_lead_time", "production_cost")]))
+                      # we see that, a weak correlation between our variables does exist
+
+summary(model4)
+library(MASS)
+plot(model4$residuals)
+stepAIC(model4)
+confint(model4)
+unloadNamespace("MASS") # it causing some issues so we deactivate this package temporary
+
+# Seeing the P.value of the model5 we cannot reject the null hypothesis (that the variables
+#cannot be equal to 0)
+
 

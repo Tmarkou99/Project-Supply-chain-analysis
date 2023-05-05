@@ -10,6 +10,7 @@ author: "Theodoros Markou"
 ### Subsets / sub-data frames
 
 1.  `Subset1` is a part of the original data-frame that contains only the Shipping times,Shipping costs,Transportation modes,Routes, carrier, Location and it used for calculating the efficiency of the transportation modes and Routes on different Countries.\
+
 2.  `Subset2`
 
 3.  `Subset3` contains a customer demographic part of the original data set. 1. The output that we get using this data set is firstly the demog_type1 which shows the destribution of the buyers
@@ -69,3 +70,54 @@ author: "Theodoros Markou"
         `The interpretation :` If you move the manufacturing process in for example Mumbai which is the least expensive location, you reduce the production costs by "25.264" (having all the other parameters at the same place)\
 
         It's worth noting that the standard errors for the coefficients are relatively large compared to their estimates, which may indicate that the sample size is small or that there is a large amount of variation in the data.
+
+# Interpretation / Models
+
+`model1 and model2` :
+
+1.  
+
+        ### For model1
+        Coefficients:
+                              Estimate Std. Error t value Pr(>|t|)    
+        (Intercept)           52.50179   15.28938   3.434 0.000905 ***
+        LocationChennai      -12.44069    9.71726  -1.280 0.203778    
+        LocationDelhi        -14.50106   10.37912  -1.397 0.165846    
+        LocationKolkata      -24.57007    9.31531  -2.638 0.009854 ** 
+        LocationMumbai       -29.12654    9.68978  -3.006 0.003440 ** 
+        typehaircare           1.86839    7.84762   0.238 0.812364    
+        typeskincare           5.55946    7.79130   0.714 0.477374    
+        Costs                 -0.01064    0.01176  -0.904 0.368354    
+        `Production volumes`   0.01264    0.01167   1.084 0.281485    
+        `Shipping costs`       0.76300    1.14655   0.665 0.507466    
+        `Shipping times`       0.58049    1.08714   0.534 0.594704    
+        ---
+        Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+        Residual standard error: 28.67 on 89 degrees of freedom
+        Multiple R-squared:   0.12, Adjusted R-squared:  0.02116 
+        F-statistic: 1.214 on 10 and 89 DF,  p-value: 0.2931
+
+
+        ### For model2
+        Coefficients:
+                        Estimate Std. Error t value Pr(>|t|)    
+        (Intercept)       61.995      6.655   9.315 4.81e-15 ***
+        LocationChennai  -10.850      9.174  -1.183  0.23988    
+        LocationDelhi    -13.115      9.872  -1.329  0.18718    
+        LocationKolkata  -20.132      8.729  -2.306  0.02326 *  
+        LocationMumbai   -25.264      8.974  -2.815  0.00593 ** 
+        ---
+        Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+        Residual standard error: 28.24 on 95 degrees of freedom
+        Multiple R-squared:  0.08918,   Adjusted R-squared:  0.05083 
+        F-statistic: 2.325 on 4 and 95 DF,  p-value: 0.06194
+
+    The multiple R-squared measures how well the linear regression model as a whole fits the data. It ranges from 0 to 1, where 0 indicates the model explains none of the variability in the response variable, and 1 indicates the model explains all of the variability. In the first example, the multiple R-squared is 0.12, which means that the model explains 12% of the variability in the response variable.
+
+    The adjusted R-squared is a modified version of the multiple R-squared that adjusts for the number of predictors in the model. It penalizes the multiple R-squared for including predictors that do not significantly improve the model fit. A higher adjusted R-squared indicates that a larger proportion of the variability in the response variable is explained by the model, taking into account the number of predictors. In the first model, the adjusted R-squared is 0.02116, which means that the model does not explain much of the variability in the response variable after adjusting for the number of predictors.
+
+    In the second model, the multiple R-squared is 0.08918, which indicates that the model explains 8.9% of the variability in the response variable. The adjusted R-squared is 0.05083, which means that the model does not explain much of the variability in the response variable after adjusting for the number of predictors.
+
+    In both cases, the p-values of the F-statistic suggest that the model does not provide a good fit to the data, as they are greater than the typical significance level of 0.05. This means that the predictors in the model are not significantly associated with the response variable. The coefficients for the predictors indicate the expected change in the response variable for a one-unit increase in each predictor, holding all other predictors constant. **For example, in the first model, the coefficient for Location Kolkata is -24.57007, which means that we would expect the production cost to decrease by \$24.57 if the location changes from Kolkata to the reference location. However, none of the coefficients are statistically significant at the typical significance level of 0.05, so we cannot be confident that the coefficients are different from 0**
