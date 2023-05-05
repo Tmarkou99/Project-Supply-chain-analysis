@@ -4,22 +4,6 @@
 title: "README"
 author: "Theodoros Markou"
 ---
-
-# Notes
-
-### Subsets / sub-data frames
-
-1.  `Subset1` is a part of the original data-frame that contains only the Shipping times,Shipping costs,Transportation modes,Routes, carrier, Location and it used for calculating the efficiency of the transportation modes and Routes on different Countries.\
-
-2.  `Subset2`
-
-3.  `Subset3` contains a customer demographic part of the original data set. 1. The output that we get using this data set is firstly the demog_type1 which shows the destribution of the buyers
-
-### Models
-
-1.  `model1` Is the model used for finding the connection between costs and the manufacturing process.
-2.  
-
 # Tasks
 
 1.  **Cluster analysis** for similar products based on characteristics such as price, lead time, defect rates, production cost etc. by country. `done`
@@ -44,17 +28,24 @@ author: "Theodoros Markou"
 
 11. **Cost analysis**: You could use the Price, Shipping costs, Manufacturing costs, and Costs variables to perform a comprehensive cost analysis of your supply chain, identify opportunities to reduce costs, and improve your bottom line. `done`
 
-```{r setup, include=FALSE}
+# Notes
 
-```
+### Subsets / sub-data frames
 
-```{r cars}
+1.  `Subset1` is a part of the original data-frame that contains only the Shipping times,Shipping costs,Transportation modes,Routes, carrier, Location and it used for calculating the efficiency of the transportation modes and Routes on different Countries.\
 
-```
+2.  `Subset2`
 
-```{r pressure, echo=FALSE}
+3.  `Subset3` contains a customer demographic part of the original data set. 1. The output that we get using this data set is firstly the demog_type1 which shows the destribution of the buyers
 
-```
+### Models
+
+1.  `model1` Is the model used for finding the connection between costs and the manufacturing process.
+2.  
+
+
+
+
 
 # Results
 

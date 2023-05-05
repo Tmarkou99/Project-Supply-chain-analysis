@@ -453,6 +453,7 @@ model3 <- lm(formula = inspection_results ~ production_cost + defect_rates + pro
 summary(model3)
 hist(model3$residuals)
 boxplot(model3$residuals)
+confint(model3)           # Note: investigate this
 View(cor(subset5))
 
 View(cor(subset5[, c("defect_rates", "production_lead_time")]))
