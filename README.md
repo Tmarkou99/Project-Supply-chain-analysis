@@ -60,6 +60,8 @@ author: "Theodoros Markou"
 
         It's worth noting that the standard errors for the coefficients are relatively large compared to their estimates, which may indicate that the sample size is small or that there is a large amount of variation in the data.
 
+# Graphs
+
 # Interpretation of Models
 
 ### model1 and model2 :
