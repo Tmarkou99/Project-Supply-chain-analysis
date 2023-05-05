@@ -73,7 +73,7 @@ author: "Theodoros Markou"
 
 # Interpretation / Models
 
-`model1 and model2` :
+### model1 and model2 :
 
 1.  
 
