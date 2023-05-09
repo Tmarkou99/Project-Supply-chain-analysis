@@ -514,3 +514,13 @@ AIC(model6)         # the AIC test starts from 350.98 so stepAIC will try to red
 stepAIC(model6)     # we see the suggested model has AIC 65.19
 
 
+
+# 5.2 How can we reduce the defect rates in the different products
+# First we will se the avverage number of defect rate in different type o products.
+#we can assume that, the number of defect rate is different between the type of products. So
+#i will try to see how can i reduce the number of defect rates for the type "haircare".
+# i will use the dataframe "haircare" that contains only the 
+
+
+
+
