@@ -147,7 +147,7 @@ In both cases, the p-values of the F-statistic suggest that the model does not p
     Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
     Residual standard error: 1.346 on 94 degrees of freedom
-    Multiple R-squared:  0.1949,	Adjusted R-squared:  0.1521 
+    Multiple R-squared:  0.1949,    Adjusted R-squared:  0.1521 
     F-statistic: 4.551 on 5 and 94 DF,  p-value: 0.0009246
     ```
 

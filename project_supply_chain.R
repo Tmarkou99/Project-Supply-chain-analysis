@@ -6,11 +6,10 @@ library(psych)
 library(lmtest)
 library(readr)
 library(factoextra)
-library(MASS) # needed for the stepAIC function
+#library(MASS)  needed for the stepAIC function
 library(tidyr)
 library(forcats)
 library(lmtest)
-library(AIC)
 library(scales)
 
 data <- read_csv("data.csv")
@@ -424,7 +423,7 @@ stepAIC(model1) # this test suggests the formula in result4.1 (it requires the M
 unloadNamespace("MASS") # it causing some issues so we deactivate this package temporary
 
 model2 <- summary(lm(formula = production_cost ~ Location , data = subset4))
-model2
+model2          # the suggested model by stepAIC function
 
 
 ########################### 5. Manufacturing Analysis
@@ -448,12 +447,12 @@ subset5
 table(subset5$inspection_results)
 
 model3 <- lm(formula = inspection_results ~ production_cost + defect_rates + production_lead_time
-     + production_volumes, data = subset5) # να το ξανατσεκάρω γιατι θέλει αλλαγή
+     + production_volumes, data = subset5) # the first model for the inspection result
 
 summary(model3)
 hist(model3$residuals)
 boxplot(model3$residuals)
-confint(model3)           # Note: investigate this
+confint(model3)           # Note: investigate this!?
 View(cor(subset5))
 
 View(cor(subset5[, c("defect_rates", "production_lead_time")]))
@@ -471,7 +470,7 @@ model4 <- lm(formula = inspection_results ~  defect_rates + production_lead_time
 
                       
 View(cor(subset5[, c("inspection_results", "defect_rates", "production_lead_time", "production_cost")]))
-                      # we see that, a weak correlation between our variables does exist
+                      # we see a weak correlation between our variables does exist
 
 summary(model4)
 library(MASS)
@@ -489,7 +488,7 @@ model5 <- lm(formula = `Defect rates` ~ type + price + available + sold + revenu
      carrier + `Shipping costs` + `Supplier name` + Location + `Lead time` + 
      `Production volumes` + `Manufacturing lead time` + production_cost + 
      `Inspection results` + `Transportation modes` + 
-     Routes + Costs , data = data)
+     Routes + Costs , data = data) # all the variables
 
 
 library(MASS)
@@ -505,15 +504,13 @@ unloadNamespace("MASS") # it causing some issues so we deactivate this package t
 model6 <- lm(formula = `Defect rates` ~ price + revenue + stock + `Supplier name` + 
      `Lead time`, data = data)
 
-library(MASS)
+
 summary(model6)
-plot(model6$residuals)    #we see a more 
+plot(model6$residuals)  
 confint(model6)
 hist(model6$residuals)
 boxplot(model6$residuals)
-AIC(model6)         # the AIC test starts from 380.415 so stepAIC will try to reduce it
+AIC(model6)         # the AIC test starts from 350.98 so stepAIC will try to reduce it
 stepAIC(model6)     # we see the suggested model has AIC 65.19
-unloadNamespace("MASS") # it causing some issues so we deactivate this package temporary
 
-summary(model6)
 
