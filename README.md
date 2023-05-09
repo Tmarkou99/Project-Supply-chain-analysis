@@ -15,9 +15,9 @@ author: "Theodoros Markou"
 
 4.  **Customer demographics analysis**: You could use the Customer demographics variable to analyze the characteristics of your customer base and identify opportunities to target specific segments with tailored marketing messages or products. `done`
 
-5.  **Manufacturing analysis**: You could analyze the Production volumes, Manufacturing lead time, Manufacturing costs, Inspection results, and Defect rates variables to optimize your manufacturing processes, reduce defects, and improve product quality. `in progress`
+5.  **Manufacturing analysis**: You could analyze the Production volumes, Manufacturing lead time, Manufacturing costs, Inspection results, and Defect rates variables to optimize your manufacturing processes, reduce defects, and improve product quality. `done`
 
-6.  **Logistics analysis**: You could analyze the Transportation modes, Routes, and Costs variables to optimize your logistics operations, reduce transportation costs, and improve delivery times.
+6.  **Logistics analysis**: You could analyze the Transportation modes, Routes, and Costs variables to optimize your logistics operations, reduce transportation costs, and improve delivery times. `in progress`
 
 7.  **Supplier analysis**: You could use the Supplier name, Location, and Lead time variables to analyze the performance of your suppliers, identify opportunities to optimize your supplier network, and negotiate better pricing and terms.
 
@@ -25,7 +25,7 @@ author: "Theodoros Markou"
 
 9.  **Shipping carrier analysis**: You could use the Shipping carriers, Shipping times, and Shipping costs variables to analyze the performance of your shipping carriers, identify opportunities to reduce shipping costs, and optimize your shipping processes. `done`
 
-10. Product analysis: You could analyze the SKU, Price, Revenue generated, and Customer demographics variables to identify your top-selling products, optimize your product mix, and develop new products that target specific customer segments.
+10. Product analysis: You could analyze the Price, Revenue generated, and Customer demographics variables to identify your top-selling products, optimize your product mix, and develop new products that target specific customer segments.
 
 11. **Cost analysis**: You could use the Price, Shipping costs, Manufacturing costs, and Costs variables to perform a comprehensive cost analysis of your supply chain, identify opportunities to reduce costs, and improve your bottom line. `done`
 

@@ -11,6 +11,7 @@ library(tidyr)
 library(forcats)
 library(lmtest)
 library(scales)
+library(ggcorrplot)
 
 data <- read_csv("data.csv")
 
@@ -151,6 +152,16 @@ transport_effctv <- subset1 %>%
   summarize(mean_effectiveness = mean(effectiveness))
 
 View(transport_effctv)
+
+transport_effctv %>% 
+  mutate(dif_from_mean = mean_effectiveness - mean(mean_effectiveness) ) %>% 
+  ggplot(aes(x = `Transportation modes`, y = dif_from_mean, fill = `Transportation modes`))+
+  geom_col(width = 0.7)+
+  geom_hline( yintercept = 0 )+
+  labs(x = "Transportation modes", y = "dif_from_mean", fill = "Transportation modes") +
+  ggtitle("Mean Cost by Transport mode") +
+  coord_flip()+
+  theme_minimal()     # so, we see that sea is the cheapest transportation mode
 
 
 # So, we see that based on the cost and time the most efficient route
@@ -481,6 +492,20 @@ unloadNamespace("MASS") # it causing some issues so we deactivate this package t
 
 # Seeing the P.value of the model5 we cannot reject the null hypothesis (it means that the 
 #variable coefficients can be equal to 0)
+
+# 5.2 how can we reduce the defect rates
+
+data %>%                    #visualization of the mean defect rate by type of product.
+  group_by(type) %>% 
+  ggplot(aes(x = type, y = `Defect rates`))+
+  geom_boxplot()+
+  theme_minimal()
+
+data %>%                    # our number maches the boxplot above
+  group_by(type) %>% 
+  summarise(mean_defects = mean(`Defect rates`)) %>% 
+  arrange(desc(mean_defects))
+
 names(data)
 
 model5 <- lm(formula = `Defect rates` ~ type + price + available + sold + revenue + 
@@ -515,23 +540,30 @@ stepAIC(model6)     # we see the suggested model has AIC 65.19
 
 
 
-# 5.2 How can we reduce the defect rates in the different products
-# First we will see the average number of defect rate in different type o products.
 
-#we can assume that, the number of defect rate is different between the type of products. So
-#i will try to see how can i reduce the number of defect rates for the type "haircare".
-# i will use the data.frame "haircare" that contains only the haircare products.
+########################### 6. Logistics analysis
 
-data %>%                    #visualization of the mean defect rate by type of product.
-  group_by(type) %>% 
-  ggplot(aes(x = type, y = `Defect rates`))+
-  geom_boxplot()
+# 6.1 How can we optimize this process
+table(data$`Transportation modes`)
 
-data %>%
-  group_by(type) %>% 
-  summarise(percent = mean(`Defect rates`)) %>% 
-  arrange(desc(percent))
+subset5 <- data %>% 
+  mutate ( transport_mode = recode( `Transportation modes`,
+                            "Air" = 1,
+                            "Rail" = 2,
+                            "Road" = 3,
+                            "Sea" = 4)) 
 
+table(subset5$transport_mode)
+
+
+corr_logistics <- cor(subset5[, c("Shipping costs", "Shipping times", "shipping_lead_time",
+                               "price", "shipping_lead_time",
+                               "production_cost", "transport_mode")])
+
+ggcorrplot(corr_logistics,            # zoom the graph for better view
+           type = "lower",            # shows the lower part of board
+           outline.color = "white",
+           lab = TRUE)                # adds labels
 
 
 
