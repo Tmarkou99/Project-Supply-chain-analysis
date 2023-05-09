@@ -516,10 +516,21 @@ stepAIC(model6)     # we see the suggested model has AIC 65.19
 
 
 # 5.2 How can we reduce the defect rates in the different products
-# First we will se the avverage number of defect rate in different type o products.
+# First we will see the average number of defect rate in different type o products.
+
 #we can assume that, the number of defect rate is different between the type of products. So
 #i will try to see how can i reduce the number of defect rates for the type "haircare".
-# i will use the dataframe "haircare" that contains only the 
+# i will use the data.frame "haircare" that contains only the haircare products.
+
+data %>%                    #visualization of the mean defect rate by type of product.
+  group_by(type) %>% 
+  ggplot(aes(x = type, y = `Defect rates`))+
+  geom_boxplot()
+
+data %>%
+  group_by(type) %>% 
+  summarise(percent = mean(`Defect rates`)) %>% 
+  arrange(desc(percent))
 
 
 
