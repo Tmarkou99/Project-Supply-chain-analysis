@@ -33,7 +33,7 @@ author: "Theodoros Markou"
 
 ### Subsets / sub-data frames
 
-1.  `Subset1` is a part of the original data-frame that contains only the Shipping times,Shipping costs,Transportation modes,Routes, carrier, Location and it used for calculating the efficiency of the transportation modes and Routes on different Countries.\
+1.  `Subset1` is a part of the original data-frame that contains only the Shipping times,Shipping costs,Transportation modes,Routes, carrier, Location and it used for calculating the efficiency of the transportation modes and Routes on different Countries.
 
 2.  `Subset2` uses variables such as price, sold , type, revenue and it used for cluster analysis to be able to see the reaction between the type of products.
 
