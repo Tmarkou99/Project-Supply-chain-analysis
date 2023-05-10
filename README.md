@@ -35,9 +35,30 @@ author: "Theodoros Markou"
 
 1.  `Subset1` is a part of the original data-frame that contains only the Shipping times,Shipping costs,Transportation modes,Routes, carrier, Location and it used for calculating the efficiency of the transportation modes and Routes on different Countries.\
 
-2.  `Subset2`
+2.  `Subset2` uses variables such as price, sold , type, revenue and it used for cluster analysis to be able to see the reaction between the type of products.
 
 3.  `Subset3` contains a customer demographic part of the original data set. 1. The output that we get using this data set is firstly the demog_type1 which shows the destribution of the buyers
+
+    1.  `demog_type1` contains for each product type, the percentage of gender type that buys these product for example, the gender "male" buys 47.6% hair care products, 19.0% cosmetics and 33.3% buys skin care products.
+
+                      cosmetics haircare skincare   Sum
+              both         21.7     30.4     47.8 100.0
+              female       40.0      8.0     52.0 100.0
+              male         19.0     47.6     33.3 100.0
+              Unknown      22.6     48.4     29.0 100.0
+
+    2.  `demog_type2` contains the percentage of buyers for the locations.
+
+                      Bangalore Chennai  Delhi Kolkata Mumbai
+              both        38.89   15.00  13.33   24.00  22.73
+              female      27.78   20.00  40.00   24.00  18.18
+              male        27.78   20.00  20.00   20.00  18.18
+              Unknown      5.56   45.00  26.67   32.00  40.91
+              Sum        100.00  100.00 100.00  100.00 100.00
+
+    3.  
+
+4.  `subset4`
 
 ### Models
 
