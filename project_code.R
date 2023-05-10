@@ -282,7 +282,7 @@ demog_type3
 
 
 # reformating the table to show exactly each gender's preferences (3 = in % buyers by gender)
-demog_type3 %>% 
+demog_type3 <- demog_type3 %>% 
   rename( gender = "Var1", type = "Var2", percent = "Freq") %>% 
   group_by(type) %>% 
   pivot_wider(names_from = "type" , values_from = "percent") 
@@ -342,15 +342,15 @@ products_per_location <- as.data.frame(table(subset3$Location))
 products_per_location <- products_per_location  %>%  rename(Location = "Var1") # renaming the Var1 to Location
 products_per_location        # Checking that structure of the table
 
-result3 <- subset3 %>% 
+result3.1 <- subset3 %>% 
   group_by(Location,type) %>% 
   summarise(number = n()) %>% 
   pivot_wider(names_from = type, values_from = number) %>% 
   inner_join(products_per_location, by = "Location")
   
-result3                      # Checking the inner_join output for wrong values or output
+result3.1                      # Checking the inner_join output for wrong values or output
 
-result3 <- result3 %>%
+result3.1 <- result3.1 %>%
   pivot_longer(cols = cosmetics:skincare, names_to = "type", values_to = "count") %>%
   group_by(type) %>%
   slice_max(count) %>%   #This Function extract rows with the maximum values of a particular column or columns
@@ -359,7 +359,7 @@ result3 <- result3 %>%
   select(type, Location, total = "Freq" , count , percentage )
 
   
-View(result3) 
+View(result3.1) 
   
 
 ############################ 4.  Cost analysis

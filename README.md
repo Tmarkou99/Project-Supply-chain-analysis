@@ -56,7 +56,9 @@ author: "Theodoros Markou"
               Unknown      5.56   45.00  26.67   32.00  40.91
               Sum        100.00  100.00 100.00  100.00 100.00
 
-    3.  
+    3.  `demog_type3` it contains the exact same information with demog_type1 but i don't use the as.table function.
+
+    4.  
 
 4.  `subset4`
 
@@ -68,13 +70,37 @@ author: "Theodoros Markou"
 
 # Results
 
-1.  `result1`
-2.  `result2`
+1.  `result1` It shows the correlation between shipping times, shipping costs and Routes that used for the "Route Analysis".
+
+                       Shipping costs Shipping times      Routes
+        Shipping costs     1.00000000     0.04510812  0.07157776
+        Shipping times     0.04510812     1.00000000 -0.10562432
+        Routes             0.07157776    -0.10562432  1.00000000
+
+2.  `result2` It shows the type of product that each "gender" prefers and the percentage of products that buys this type of product.
+
+          gender  preferes percentage
+          <fct>   <fct>         <dbl>
+        1 both    skincare       47.8
+        2 female  skincare       52  
+        3 male    haircare       47.6
+        4 Unknown haircare       48.4
+
 3.  `result3`
-4.  `result4` shows us in order the average expenses for production in descending order. The results shows us that in average the most expensive Location is Chennai with score "225.86" and on the other hand the least expensive Location is Mumbai with score "157.11" .\
+
+4.  `result3.1` It shows in percent, the location that sold the most for each type of product.
+
+          type      Location  total count percentage
+          <chr>     <chr>     <int> <int>      <dbl>
+        1 cosmetics Mumbai       22     8       36.4
+        2 haircare  Bangalore    18     9       50  
+        3 skincare  Kolkata      25    13       52  
+
+5.  `result4` shows us in order the average expenses for production in descending order. The results shows us that in average the most expensive Location is Chennai with score "225.86" and on the other hand the least expensive Location is Mumbai with score "157.11" .\
     \
     To measure the sore for the average expenses by product a the following formula used :\
     `avg_cost = (Shipping costs + Production costs + Costs)/3`\
+
     1.  `result4.1` shows us the summary of the model that function `steAIC()` recommended , the result agree with the `result4` because both of them shows that, in order to reduce the production cost one way is to transfer the manufacturing process in different Location.
 
         `The interpretation :` If you move the manufacturing process in for example Mumbai which is the least expensive location, you reduce the production costs by "25.264" (having all the other parameters at the same place)\
