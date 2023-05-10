@@ -60,13 +60,46 @@ author: "Theodoros Markou"
 
     4.  
 
-4.  `subset4`
+4.  `subset4` contains only the variables which affect the costs and i use it to analyse the cost of this supply chain.
+
+5.  `subset5` contains the variables that i need to analyse the manufacturing process
 
 ### Models
 
+Here you can see all the linear model that i use to analyses the supply chain, some of them took data from subsets and some other investigate the connection between the variables out of the original data frame. To get a better understanding, i use a function in R called "stepAIC" which is the AIC test that evaluates the model, the "stepAIC" function is a repeated test AIC with a main difference, it tests all the indepentent variables between them and with all the different combinations. After that, it gives the model that fits the most with our data.
+
 1.  `model1` Is the model used for finding the connection between costs and the manufacturing process.
-2.  `model2` Is the improved version of model1 that "stepAIC()" function sugested
-3.  `model3`
+
+        lm(formula = production_cost ~ Location + type + Costs + `Production volumes` + 
+            `Shipping costs` + `Shipping times`, data = subset4)
+
+2.  `model2` Is the improved version of model1 that "stepAIC()" function suggested.
+
+        lm(formula = production_cost ~ Location, data = subset4)
+
+3.  `model3` Is the first attempt to investigate the parameters that affect the "inspecting results" and we use it to analyse the Manufacturing process and how it can be improved. We use the subset5 for this analysis.
+
+        lm(formula = inspection_results ~ production_cost + defect_rates + 
+            production_lead_time + production_volumes, data = subset5)
+
+4.  `model4` Is the improved version of model3 that "stepAIC()" function suggested.
+
+        lm(formula = inspection_results ~ defect_rates + production_lead_time, 
+            data = subset5)
+
+5.  `model5` It investigates the connection between "defect rates" and the other variables of the original dataset.
+
+        lm(formula = `Defect rates` ~ type + price + available + sold + 
+            revenue + stock + shipping_lead_time + `Order quantities` + 
+            `Shipping times` + carrier + `Shipping costs` + `Supplier name` + 
+            Location + `Lead time` + `Production volumes` + `Manufacturing lead time` + 
+            production_cost + `Inspection results` + `Transportation modes` + 
+            Routes + Costs, data = data)
+
+6.  `model6` Is the improved version of model5 that "stepAIC()" function suggested.
+
+        lm(formula = `Defect rates` ~ price + revenue + stock + `Supplier name` + 
+            `Lead time`, data = data)
 
 # Results
 
@@ -86,17 +119,25 @@ author: "Theodoros Markou"
         3 male    haircare       47.6
         4 Unknown haircare       48.4
 
-3.  `result3`
+3.  `result3` Shows the location that males bought hair care product. We see that, at the result2 47.6% bought hair care product, in this result we see the location of which 47.6% bought hair care product
 
-4.  `result3.1` It shows in percent, the location that sold the most for each type of product.
+          Location   sold percent
+          <chr>     <int>   <dbl>
+        1 Bangalore     4   19.0 
+        2 Chennai       2    9.52
+        3 Delhi         1    4.76
+        4 Kolkata       2    9.52
+        5 Mumbai        1    4.76
 
-          type      Location  total count percentage
-          <chr>     <chr>     <int> <int>      <dbl>
-        1 cosmetics Mumbai       22     8       36.4
-        2 haircare  Bangalore    18     9       50  
-        3 skincare  Kolkata      25    13       52  
+    1.  `result3.1` It shows in percent, the location that sold the most for each type of product.
 
-5.  `result4` shows us in order the average expenses for production in descending order. The results shows us that in average the most expensive Location is Chennai with score "225.86" and on the other hand the least expensive Location is Mumbai with score "157.11" .\
+              type      Location  total count percentage
+              <chr>     <chr>     <int> <int>      <dbl>
+            1 cosmetics Mumbai       22     8       36.4
+            2 haircare  Bangalore    18     9       50  
+            3 skincare  Kolkata      25    13       52  
+
+4.  `result4` shows us in order the average expenses for production in descending order. The results shows us that in average the most expensive Location is Chennai with score "225.86" and on the other hand the least expensive Location is Mumbai with score "157.11" .\
     \
     To measure the sore for the average expenses by product a the following formula used :\
     `avg_cost = (Shipping costs + Production costs + Costs)/3`\
