@@ -9,25 +9,25 @@ author: "Theodoros Markou"
 
 1.  **Cluster analysis** for similar products based on characteristics such as price, lead time, defect rates, production cost etc. by country. `done`
 
-2.  **Sales and revenue analysis**: You could use the sold, Price, and Revenue generated variables to analyze sales trends over time, identify the most profitable products, and optimize pricing strategies. `done`
+2.  **Sales and revenue analysis**: I will use the sold, Price, and Revenue generated variables to analyze sales trends over time, identify the most profitable products, and optimize pricing strategies. `done`
 
-3.  **Supply chain performance analysis**: You could analyze the Availability, Lead times, Order quantities, Shipping times, and Shipping costs variables to assess the performance of your supply chain, identify bottlenecks, and optimize your ordering and inventory management processes.
+3.  **Supply chain performance analysis**: I will analyze the Availability, Lead times, Order quantities, Shipping times, and Shipping costs variables to assess the performance of your supply chain, identify bottlenecks, and optimize my ordering and inventory management processes.
 
-4.  **Customer demographics analysis**: You could use the Customer demographics variable to analyze the characteristics of your customer base and identify opportunities to target specific segments with tailored marketing messages or products. `done`
+4.  **Customer demographics analysis**: I will use the Customer demographics variable to analyze the characteristics of my customer base and identify opportunities to target specific segments with tailored marketing messages or products. `done`
 
-5.  **Manufacturing analysis**: You could analyze the Production volumes, Manufacturing lead time, Manufacturing costs, Inspection results, and Defect rates variables to optimize your manufacturing processes, reduce defects, and improve product quality. `done`
+5.  **Manufacturing analysis**: I will analyze the Production volumes, Manufacturing lead time, Manufacturing costs, Inspection results, and Defect rates variables to optimize my manufacturing processes, reduce defects, and improve product quality. `semi-done`
 
-6.  **Logistics analysis**: You could analyze the Transportation modes, Routes, and Costs variables to optimize your logistics operations, reduce transportation costs, and improve delivery times. `in progress`
+6.  **Logistics analysis**: I will analyze the Transportation modes, Routes, and Costs variables to optimize my logistics operations, reduce transportation costs, and improve delivery times. `in progress`
 
-7.  **Supplier analysis**: You could use the Supplier name, Location, and Lead time variables to analyze the performance of your suppliers, identify opportunities to optimize your supplier network, and negotiate better pricing and terms.
+7.  **Supplier analysis**: I will use the Supplier name, Location, and Lead time variables to analyze the performance of my suppliers, identify opportunities to optimize my supplier network, and negotiate better pricing and terms.
 
-8.  **Inventory analysis**: You could analyze the Stock levels, Availability, and Order quantities variables to optimize your inventory management processes, reduce stockouts, and minimize waste.
+8.  **Inventory analysis**: I will analyze the Stock levels, Availability, and Order quantities variables to optimize my inventory management processes, reduce stockouts, and minimize waste.
 
-9.  **Shipping carrier analysis**: You could use the Shipping carriers, Shipping times, and Shipping costs variables to analyze the performance of your shipping carriers, identify opportunities to reduce shipping costs, and optimize your shipping processes. `done`
+9.  **Shipping carrier analysis**: I will use the Shipping carriers, Shipping times, and Shipping costs variables to analyze the performance of my shipping carriers, identify opportunities to reduce shipping costs, and optimize my shipping processes. `done`
 
-10. Product analysis: You could analyze the Price, Revenue generated, and Customer demographics variables to identify your top-selling products, optimize your product mix, and develop new products that target specific customer segments.
+10. **Product analysis**: I will analyze the Price, Revenue generated, and Customer demographics variables to identify my top-selling products, optimize my product mix, and develop new products that target specific customer segments.
 
-11. **Cost analysis**: You could use the Price, Shipping costs, Manufacturing costs, and Costs variables to perform a comprehensive cost analysis of your supply chain, identify opportunities to reduce costs, and improve your bottom line. `done`
+11. **Cost analysis**: I will use the Price, Shipping costs, Manufacturing costs, and Costs variables to perform a comprehensive cost analysis of my supply chain, identify opportunities to reduce costs, and improve my bottom line. `done`
 
 # Notes
 
@@ -57,8 +57,6 @@ author: "Theodoros Markou"
               Sum        100.00  100.00 100.00  100.00 100.00
 
     3.  `demog_type3` it contains the exact same information with demog_type1 but i don't use the as.table function.
-
-    4.  
 
 4.  `subset4` contains only the variables which affect the costs and i use it to analyse the cost of this supply chain.
 
@@ -107,8 +105,8 @@ Here you can see all the linear model that i use to analyses the supply chain, s
 
                        Shipping costs Shipping times      Routes
         Shipping costs     1.00000000     0.04510812  0.07157776
-        Shipping times     0.04510812     1.00000000 -0.10562432
-        Routes             0.07157776    -0.10562432  1.00000000
+        Shipping times     0.04510812     1.00000000 -0.10562432*
+        Routes             0.07157776    -0.10562432*  1.00000000
 
 2.  `result2` It shows the type of product that each "gender" prefers and the percentage of products that buys this type of product.
 
