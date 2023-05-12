@@ -245,13 +245,17 @@ The multiple R-squared value of 0.1949 means that the model can explain about 19
 
 So, one way to improve the the `defect rates` is to reduce the Lead time (the time that the product is stationary at different places) but also we see the negative relation between stock and defect rates. This can mean that, an increase of stock product can will reduce the defect rates.
 
-# Analysis 
+# Analysis
 
-1.  Logistics Analysis\
+1.  **Logistics Analysis**\
     In Analysis No.6 we investigate the correlation between the logistic variable such as "Shipping Lead Time" , "Shipping costs" and others. We emphasize in the next three coefficients.\
-    ![](images/image-1244613156.png){width="430"}
-    1.   `Negative correlation between Price and Prduction Costs`
+    ![](images/image-756552902.png)\
 
+    1.  `Negative correlation between Price and Prduction Costs`
+
+    ```{=html}
+    <!-- -->
+    ```
         This negative correlation indicates an inverse relationship between these two variables. In other words, as the price increases, the production cost tends to decrease, and vice versa.
 
         This coefficient suggests that there may be factors or mechanisms in place that lead to cost savings in the production process as the price of the product increases. This could be due to economies of scale, improved efficiency, or other cost optimization strategies implemented by the producer.
