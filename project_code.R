@@ -221,7 +221,7 @@ clusters <- cutree(cluster1, k = 3)
 # adding cluster assignment to subset2 data frame
 subset2$cluster <- factor(clusters, labels = "type")
 
-# exclude non-numeric columns before passing to fviz_cluster
+# excluding non-numeric columns before passing to fviz_cluster
 fviz_cluster(list(data = subset2[, -c(1, 5)], cluster = subset2$cluster), 
              geom = "point", 
              main = "Cluster visualization")
@@ -282,12 +282,12 @@ demog_type3
 
 
 # reformating the table to show exactly each gender's preferences (3 = in % buyers by gender)
-demog_type3 <- demog_type3 %>% 
+prefrences <- demog_type3 %>% 
   rename( gender = "Var1", type = "Var2", percent = "Freq") %>% 
   group_by(type) %>% 
   pivot_wider(names_from = "type" , values_from = "percent") 
 
-
+prefrences  # the prefrences of each gender in %
 demog_type3 # the data.frame in % by gender and type of product
 
 
@@ -334,7 +334,7 @@ subset3 <- data %>%
                             "Female" = "female",
                             "Uknown" = "uknown",
                             "Non-binary" = "both")) %>% 
-  select(type, price, gender , revenue, Location, sold) # (adding the sold to the data.frame)
+  select(type, price, gender , revenue, Location, sold) # (adding the "sold" to the data.frame)
 
 names(subset3)
 
@@ -366,7 +366,7 @@ View(result3.1)
 # 4.1 The most expensive Location by average cost per product
 table(data$type)
 
-subset4 <- data %>%       # Πρώτα να το δω χωρίς το recode
+subset4 <- data %>%       # THIS WILL BE DELETED Πρώτα να το δω χωρίς το recode
   #mutate(type = recode(type, skincare = 1, haircare = 2, cosmetics = 3)) %>%  #it need the library(forcats)
   select(Location, type, price, `Shipping costs`, production_cost , Costs, `Production volumes`, 
          `Shipping times`)
@@ -559,9 +559,9 @@ table(subset5$transport_mode)
 corr_logistics <- cor(subset5[, c("Shipping costs", "Shipping times", "shipping_lead_time",
                                "price", "shipping_lead_time",
                                "production_cost", "transport_mode")])
+corr_logistics
 
 ggcorrplot(corr_logistics,            # zoom the graph for better view
-           type = "lower",            # shows the lower part of board
            outline.color = "white",
            lab = TRUE)                # adds labels
 
