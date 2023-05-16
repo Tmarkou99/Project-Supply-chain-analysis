@@ -429,12 +429,17 @@ plot(model1$residuals)
 summary(model1)  # summarizing the first model to see the coefficients between cost variables.
                  # Next we will see exactly which variables need to stay in the model1
 
+
+plot(model1, which = 2)     # the which = 2 can visualize the normality of my residuals
+plot(model1, which = 3)     # the which = 3 can visualize the heteroscedasticity 
+
 library(MASS)
 stepAIC(model1) # this test suggests the formula in result4.1 (it requires the MASS library)
 unloadNamespace("MASS") # it causing some issues so we deactivate this package temporary
 
 model2 <- summary(lm(formula = production_cost ~ Location , data = subset4))
 model2          # the suggested model by stepAIC function
+
 
 
 ########################### 5. Manufacturing Analysis
@@ -466,6 +471,9 @@ boxplot(model3$residuals)
 confint(model3)           # Note: investigate this!?
 View(cor(subset5))
 
+plot(model3, which = 2)     # the which = 2 can visualize the normality of my residuals
+plot(model3, which = 3)     # the which = 3 can visualize the heteroscedasticity 
+
 View(cor(subset5[, c("defect_rates", "production_lead_time")]))
 # here we see a positive correlation coefficients between the variable
 #we can see that, if the defect_rates increase the production_lead_time tend to increase as well.
@@ -479,6 +487,8 @@ unloadNamespace("MASS") # it causing some issues so we deactivate this package t
 model4 <- lm(formula = inspection_results ~  defect_rates + production_lead_time
    , data = subset5)  # suggested model?!
 
+plot(model4, which = 2)     # the which = 2 can visualize the normality of my residuals
+plot(model4, which = 3)     # the which = 3 can visualize the heteroscedasticity 
                       
 View(cor(subset5[, c("inspection_results", "defect_rates", "production_lead_time", "production_cost")]))
                       # we see a weak correlation between our variables does exist
@@ -515,6 +525,8 @@ model5 <- lm(formula = `Defect rates` ~ type + price + available + sold + revenu
      `Inspection results` + `Transportation modes` + 
      Routes + Costs , data = data) # all the variables
 
+plot(model5, which = 2)     # the which = 2 can visualize the normality of my residuals
+plot(model5, which = 3)     # the which = 3 can visualize the heteroscedasticity 
 
 library(MASS)
 summary(model5)
@@ -538,8 +550,8 @@ boxplot(model6$residuals)
 AIC(model6)         # the AIC test starts from 350.98 so stepAIC will try to reduce it
 stepAIC(model6)     # we see the suggested model has AIC 65.19
 
-
-
+plot(model6, which = 2)     # the which = 2 can visualize the normality of my residuals
+plot(model6, which = 3)     # the which = 3 can visualize the heteroscedasticity 
 
 ########################### 6. Logistics analysis
 
@@ -564,6 +576,7 @@ corr_logistics
 ggcorrplot(corr_logistics,            # zoom the graph for better view
            outline.color = "white",
            lab = TRUE)                # adds labels
+
 
 
 
