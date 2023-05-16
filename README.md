@@ -253,9 +253,6 @@ So, one way to improve the the `defect rates` is to reduce the Lead time (the ti
 
     1.  `Negative correlation between Price and Prduction Costs`
 
-    ```{=html}
-    <!-- -->
-    ```
         This negative correlation indicates an inverse relationship between these two variables. In other words, as the price increases, the production cost tends to decrease, and vice versa.
 
         This coefficient suggests that there may be factors or mechanisms in place that lead to cost savings in the production process as the price of the product increases. This could be due to economies of scale, improved efficiency, or other cost optimization strategies implemented by the producer.
